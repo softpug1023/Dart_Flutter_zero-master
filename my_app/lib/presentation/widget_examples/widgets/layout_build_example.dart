@@ -8,7 +8,7 @@ class LayoutBuilderExample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.green,
+      color: Theme.of(context).colorScheme.primaryContainer,
       height: 300,
       width: 300,
       child: LayoutBuilder(builder: (context, constraints) {

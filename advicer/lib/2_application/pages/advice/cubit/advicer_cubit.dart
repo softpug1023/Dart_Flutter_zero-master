@@ -12,8 +12,8 @@ const String cacheFailure = "cache failure, please try again";
 const String generalFailure = "something gone wrong please try again";
 
 class AdvicerCubit extends Cubit<AdvicerCubitState> {
-  AdvicerCubit() : super(AdvicerInitial());
-  final AdviceUseCases adviceUseCases = AdviceUseCases();
+  final AdviceUseCases adviceUseCases;
+  AdvicerCubit({required this.adviceUseCases}) : super(AdvicerInitial());
 
   void adviceRequested() async {
     emit(AdvicerStateLoading());

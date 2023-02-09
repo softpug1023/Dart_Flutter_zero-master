@@ -9,13 +9,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
+import '../../../injection.dart';
+
 class AdvicePageWrapperProvider extends StatelessWidget {
   const AdvicePageWrapperProvider({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AdvicerCubit(),
+      create: (context) => sl<AdvicerCubit>(),
       child: AdvicePage(),
     );
   }
@@ -43,7 +45,7 @@ class AdvicePage extends StatelessWidget {
         ],
       ),
       body: Padding(
-        padding: EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
             Expanded(
@@ -66,10 +68,16 @@ class AdvicePage extends StatelessWidget {
                 } else if (state is AdvicerStateError) {
                   return ErrorMessage(message: state.message);
                 }
-                return Placeholder();
+                return const Placeholder();
               })),
             ),
-            const SizedBox(height: 100, child: Center(child: CustomButton())),
+            SizedBox(
+                height: 100,
+                child: Center(
+                    child: CustomButton(
+                  onTap: () =>
+                      BlocProvider.of<AdvicerCubit>(context).adviceRequested(),
+                ))),
           ],
         ),
       ),
